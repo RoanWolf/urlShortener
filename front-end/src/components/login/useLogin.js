@@ -4,10 +4,12 @@ export default function useLogin() {
   const [usename, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  async function handleRegister() {
+  
+  async function handle(route,e){
+    e.preventDefault();
     if (usename.trim() === "" || password.trim() === "") return;
     try {
-      const res = await fetch("http://localhost:3000/v1/api/register", {
+      const res = await fetch(`http://localhost:3000/v1/api/${route}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,5 +26,5 @@ export default function useLogin() {
     }
   }
 
-  return { usename, setUsername, password, setPassword, handleRegister };
+  return { usename, setUsername, password, setPassword, handle };
 }

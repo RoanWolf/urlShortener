@@ -1,6 +1,6 @@
 import useLogin from "./useLogin.js";
 export default function Login() {
-  const { usename, setUsername, password, setPassword, handleRegister } =
+  const { usename, setUsername, password, setPassword, handle } =
     useLogin();
   return (
     <div style={{ color: "#FFFF", margin: "20px", padding: "10px" }}>
@@ -29,8 +29,8 @@ export default function Login() {
       </div>
 
       <div>
-        <button >登录</button>
-        <button onClick={handleRegister}>注册</button>
+        <button onClick={(e)=>handle('login',e)}>登录</button>
+        <button onClick={(e)=>handle('register',e)}>注册</button>
       </div>
     </div>
   );

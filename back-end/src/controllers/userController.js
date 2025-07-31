@@ -1,20 +1,5 @@
 import User from "../models/userModel.js";
-// 注册账号
-export async function createUser1(req, res) {
-  const information = req.body; // { username, password } username is unique
-  try {
-    await User.create(information);
-    return res.status(201).json({
-      message: "User created successfully",
-    });
-  } catch (error) {
-    if (error.name === "SequelizeUniqueConstraintError") {
-      return res.status(400).json({ message: "Username already exists" });
-    } else {
-      return res.status(500).json({ message: "An error occurred." });
-    }
-  }
-}
+
 export async function createUser(req, res) {
   const information = req.body; // { username, password } username is unique
   try {
@@ -35,3 +20,17 @@ export async function createUser(req, res) {
   }
 }
 
+export async function verifyUser(req, res) {
+  const { username, password } = req.body;
+    try {
+        const user = await User.findOne({
+        where: { username, password },
+        });
+        if (!user) {
+        return res.status(401).json({ message: "Invalid credentials" });
+        }
+        return res.status(200).json({ message: "Login successful" });
+    } catch (error) {
+        return res.status(500).json({ message: "An error occurred." });
+    }
+}
