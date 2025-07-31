@@ -1,0 +1,13 @@
+body {
+  background-image: linear-gradient(
+      to bottom right,
+      rgba(18, 52, 178, 0.5),
+      rgba(40, 19, 229, 0.5)
+    ),
+    url(./src/assets/hero.jpg);
+  background-size: no-repeat;
+  font-family: "Unna", serif;
+  font-weight: 700;
+  font-style: normal;
+  
+}
