@@ -25,5 +25,5 @@ const User = sequelize.define('User', {
     tableName: 'user',
     updatedAt: false,
 });
-await User.sync({ force: true });
+
 export default User;
