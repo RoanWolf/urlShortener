@@ -3,7 +3,7 @@ import {
   hasUsername as hasUsernameApi,
   verifyUser as verifyUserApi,
 } from "../services/userService.js";
-
+import { generateToken } from "../utils/jwtHelper.js";
 export async function createUser(req, res) {
   const information = req.body;
 
@@ -31,7 +31,8 @@ export async function verifyUser(req, res) {
     if (!isUser) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
-    return res.status(200).json({ message: "Login successful" });
+    const token = generateToken(username);
+    return res.status(200).json({ message: "Login successful", token: token });
   } catch (error) {
     return res.status(500).json({ message: "An error occurred." });
   }

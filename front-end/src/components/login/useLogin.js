@@ -4,8 +4,7 @@ export default function useLogin() {
   const [usename, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  
-  async function handle(route,e){
+  async function handle(route, e) {
     e.preventDefault();
     if (usename.trim() === "" || password.trim() === "") return;
     try {
@@ -20,6 +19,9 @@ export default function useLogin() {
         }),
       });
       const data = await res.json();
+      if (data.token) {
+        localStorage.setItem("token", data.token); 
+      }
       console.log(data.message);
     } catch (e) {
       console.error("请求异常");
