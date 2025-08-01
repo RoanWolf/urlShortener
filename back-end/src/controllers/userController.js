@@ -1,15 +1,15 @@
 import {
   createUser as createUserApi,
   hasUsername as hasUsernameApi,
-  verifyUser as verifyUserApi
+  verifyUser as verifyUserApi,
 } from "../services/userService.js";
 
 export async function createUser(req, res) {
   const information = req.body;
 
   try {
-    const ok = hasUsernameApi(information.username);
-    if (ok) {
+    const user = await hasUsernameApi(information.username);
+    if (user) {
       return res.status(400).json({
         message: "Username already exists",
       });
