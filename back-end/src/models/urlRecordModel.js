@@ -8,20 +8,22 @@ const UrlRecord = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    urlLong: {
+    originURL: {
       type: DataTypes.STRING,
-      unique: true,
       allowNull: false,
     },
-    optionCustom: {
+    shortUrl: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
+    },
+    urlCode: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
   },
   {
     tableName: "tb_url",
-    updatedAt: false,
-    createdAt: false,
   }
 );
 
