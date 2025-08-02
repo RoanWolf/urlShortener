@@ -6,7 +6,7 @@ export function generateToken(data) {
   // like encode - don't upload key inform
 
 
-  const token = jwt.sign(data, JWT_SECRET);
+  const token = jwt.sign({data}, JWT_SECRET,{expiresIn:'48h'});
   return token;
 }
 export function verifyToken(token){
