@@ -22,7 +22,7 @@ const User = sequelize.define('User', {
   }
 
 }, {
-    tableName: 'user',
+    tableName: 'tb_user',
     updatedAt: false,
 });
 
