@@ -19,6 +19,9 @@ app.use((req, res, next) => {
   verifyToken(token);
   next();
 });
-
+app.post("/url", (req, res) => {
+  const {originURL,urlCode} = req.body;
+  
+});
 
 export default app;
