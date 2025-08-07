@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
+import urlRoutes from "./routes/urlRoutes.js"
 import { verifyToken } from "./utils/jwtHelper.js";
 const app = express();
 
@@ -11,17 +12,18 @@ app.use("/v1/api", userRoutes);
 app.use((req, res, next) => {
   const authorization = req.headers.authorization;
   if (!authorization) {
-    res.status(401).json({
+    return res.status(401).json({
       message: "Unauthorization",
     });
   }
   const token = authorization.split(" ")[1];
-  verifyToken(token);
-  next();
+  try {
+    verifyToken(token);
+    next();
+  } catch (e) {
+    return res.status(401).json({ message: "Invalid token" });
+  }
 });
-app.post("/url", (req, res) => {
-  const {originURL,urlCode} = req.body;
-  
-});
+app.use("/v1/api",urlRoutes);
 
 export default app;

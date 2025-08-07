@@ -1,7 +1,7 @@
 import { useState } from "react";
 import usePage from "./usePage";
 export default function Page() {
-  const { originUrl, setCode, code, setOriginUrl, handle } = usePage();
+  const { originUrl, setCode, code, setOriginUrl, handle,shortUrl } = usePage();
   return (
     <div style={{ color: "#FFFF", margin: "20px", padding: "10px" }}>
       <h1>URL SHortener</h1>
@@ -32,5 +32,8 @@ export default function Page() {
         <button onClick={handle}>生成</button>
       </div>
     </div>
-  );
+    
+
+    
+    ) 
 }

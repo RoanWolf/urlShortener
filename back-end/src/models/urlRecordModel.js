@@ -1,30 +1,37 @@
 import { DataTypes, sequelize } from "../utils/dbHelper.js";
 
-const UrlRecord = sequelize.define(
-  "UrlRecord",
+const urlRecord = sequelize.define(
+  "urlRecord",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    originURL: {
-      type: DataTypes.STRING,
+    originalUrl: {
+      type: DataTypes.TEXT,
       allowNull: false,
+      unique:true,
+      validate: {
+        isUrl: true, 
+      },
     },
     shortUrl: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique:false
     },
     urlCode: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true,
     },
   },
   {
     tableName: "tb_url",
+    updatedAt:false,
+    createAt:false
   }
 );
 
-export default UrlRecord;
+export default urlRecord;
