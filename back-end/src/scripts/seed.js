@@ -3,16 +3,19 @@ import { sequelize } from "../utils/dbHelper.js";
 
 import User from "../models/userModel.js";
 import UrlRecord from "../models/urlRecordModel.js";
-
+import encryptData from "../utils/hashHelper.js";
 try {
     
   await sequelize.authenticate();
   await User.sync({ force: true });
   await UrlRecord.sync({ force: true });
+
   const data = await readFile("./src/scripts/data.json", "utf-8");
   const users = JSON.parse(data);
-  console.log("Seeding database with users...-----------");
-  await User.bulkCreate(users);
+
+  const encryptUsers = await encryptData(users);
+  
+  await User.bulkCreate(encryptUsers);
   console.log("Database seeded successfully.");
 
 } catch (error) {
